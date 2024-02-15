@@ -25,7 +25,8 @@ const useNewsQuery = () => {
         const searchUrl = `http://localhost:8000/v2/search?q=${searchQuery}`;
         const response = await fetch(searchUrl);
         const data = await response.json();
-        setNews(data.articles);
+        console.log(data);
+        setNews(data?.result);
       } catch (error) {
         console.error('Error fetching search results:', error);
       }
@@ -48,11 +49,11 @@ const useNewsQuery = () => {
     setCategory(newCategory);
   };
 
-  const setSearchQueryAndFetch = (query) => {
-    setSearchQuery(query);
-  };
+  // const setSearchQueryAndFetch = (query) => {
+  //   setSearchQuery(query);
+  // };
 
-  return { news, setCategoryAndFetch, setSearchQueryAndFetch ,searchQuery};
+  return { news, setCategoryAndFetch, setSearchQuery,searchQuery,category};
 };
 
 export default useNewsQuery;
