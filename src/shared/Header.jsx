@@ -1,8 +1,14 @@
 import { formatHeaderTime } from "../utilities/utilities"
 import logo from "../assets/logo_light.png"
-import searchIcon from "../assets/icons/search.svg"
+
+import { useContext } from "react"
+import { NewsContext } from "../context/NewsContext"
+import SearchBAr from "../components/searchBAr"
 
 const Header = () => {
+    const {setCategoryAndFetch ,searchQuery}=useContext(NewsContext)
+    console.log(searchQuery)
+ 
   return (
     <nav className="border-b border-black py-6 md:py-8">
             <div
@@ -72,25 +78,20 @@ const Header = () => {
                 </a>
                 {/* <!-- Logo Ends --> */}
                 {/* <!-- --> */}
-                <div className="flex items-center space-x-3 lg:space-x-8">
-                    <div>
-                        <input className="border-b-[1px] border-black outline-none" type="text" placeholder="Search news"/>
-                    </div>
-                    <img src={searchIcon} />
-                </div>
+                <SearchBAr/>
             </div>
             {/* <!-- categories --> */}
             <div className="container mx-auto mt-6">
                 <ul
                     className="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold lg:text-base"
                 >
-                    <li><a href="#">General</a></li>
-                    <li><a href="#">Business</a></li>
-                    <li><a href="#">Entertainment</a></li>
-                    <li><a href="#">Health</a></li>
-                    <li><a href="#">Science</a></li>
-                    <li><a href="#">Sports</a></li>
-                    <li><a href="#">Technology</a></li>
+                    <button onClick={()=>setCategoryAndFetch('general')} >General</button>
+                  <button onClick={()=>setCategoryAndFetch('business')} >Business</button>
+                <button onClick={()=>setCategoryAndFetch('entertainment')} >Entertainment</button>
+                   <button onClick={()=>setCategoryAndFetch('health')} >Health</button>
+                  <button onClick={()=>setCategoryAndFetch('science')} >Science</button>
+                   <button onClick={()=>setCategoryAndFetch('sports')} >Sports</button>
+                   <button onClick={()=>setCategoryAndFetch('technology')} >Technology</button>
                 </ul>
             </div>
         </nav>

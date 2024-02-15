@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useNewsQuery = () => {
   const [news, setNews] = useState([]);
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -10,10 +10,7 @@ const useNewsQuery = () => {
       try {
         let url = `http://localhost:8000/v2/top-headlines?`;
         if (category) {
-          url += `category=${category}&`;
-        }
-        if (searchQuery) {
-          url += `q=${searchQuery}`;
+          url += `category=${category}`;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -23,11 +20,27 @@ const useNewsQuery = () => {
       }
     };
 
-    fetchNews();
+    const fetchSearchResults = async () => {
+      try {
+        const searchUrl = `http://localhost:8000/v2/search?q=${searchQuery}`;
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+        setNews(data.articles);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }
+    };
+
+    if (searchQuery) {
+      fetchSearchResults();
+    } else {
+      fetchNews();
+    }
 
     // Cleanup function
     return () => {
-      // Perform any necessary cleanup here
+      // Performs any necessary cleanup here
+      
     };
   }, [category, searchQuery]);
 
@@ -39,7 +52,7 @@ const useNewsQuery = () => {
     setSearchQuery(query);
   };
 
-  return { news, setCategoryAndFetch, setSearchQueryAndFetch };
+  return { news, setCategoryAndFetch, setSearchQueryAndFetch ,searchQuery};
 };
 
 export default useNewsQuery;
