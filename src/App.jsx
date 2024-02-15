@@ -31,11 +31,7 @@ function App() {
               </div>
               {/* <!-- thumb --> */}
               <div className="col-span-12 lg:col-span-8">
-                <img
-                  className="w-full"
-                  src={item?.urlToImage}
-                  alt="thumb"
-                />
+              {item?.urlToImage &&   <img className="w-full" src={item?.urlToImage} alt="thumb" />}
                 <p className="mt-5 text-base text-[#5C5955]">
                  {item?.author}
                 </p>
@@ -65,7 +61,7 @@ function App() {
               {
                 news.filter((i,index)=>index%2==!0).map((item)=>(
                   <div key={item?.source?.id} className="col-span-12 mb-6 md:col-span-8">
-                  <img className="w-full" src={item?.urlToImage} alt="thumb" />
+                  {item?.urlToImage &&   <img className="w-full" src={item?.urlToImage} alt="thumb" />}
                   {/* <!-- info --> */}
                   <div className="col-span-12 mt-6 md:col-span-4">
                     <a href="#">

@@ -1,4 +1,6 @@
-
+import { formatHeaderTime } from "../utilities/utilities"
+import logo from "../assets/logo_light.png"
+import searchIcon from "../assets/icons/search.svg"
 
 const Header = () => {
   return (
@@ -58,13 +60,13 @@ const Header = () => {
                             strokeLinejoin="round"
                         />
                     </svg>
-                    <span>Thursday, February 25, 2021</span>
+                    <span>{formatHeaderTime() }</span>
                 </div>
                 {/* <!-- Logo --> */}
                 <a href="/">
                     <img
                         className="max-w-[100px] md:max-w-[165px]"
-                        src="./assets/logo.png"
+                        src={logo}
                         alt="Lws"
                     />
                 </a>
@@ -74,7 +76,7 @@ const Header = () => {
                     <div>
                         <input className="border-b-[1px] border-black outline-none" type="text" placeholder="Search news"/>
                     </div>
-                    <img src="./assets/icons/search.svg" />
+                    <img src={searchIcon} />
                 </div>
             </div>
             {/* <!-- categories --> */}
